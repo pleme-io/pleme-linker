@@ -23,18 +23,15 @@
           # Darwin-specific build inputs for Rust crates that need system frameworks
           darwinBuildInputs = pkgs.lib.optionals isDarwin (
             [ pkgs.libiconv ]
-            ++ (with pkgs.darwinMinVersionHook or pkgs; [])
-            ++ (
-              if pkgs ? apple-sdk
-              then [ pkgs.apple-sdk ]
-              else pkgs.lib.optionals (pkgs ? darwin) (
-                with pkgs.darwin.apple_sdk.frameworks; [
-                  Security
-                  SystemConfiguration
-                  CoreFoundation
-                ]
-              )
-            )
+            ++ (if pkgs ? apple-sdk
+                then [ pkgs.apple-sdk ]
+                else pkgs.lib.optionals (pkgs ? darwin) (
+                  with pkgs.darwin.apple_sdk.frameworks; [
+                    Security
+                    SystemConfiguration
+                    CoreFoundation
+                  ]
+                ))
           );
 
           cargoNix = pkgs.callPackage ./Cargo.nix {
