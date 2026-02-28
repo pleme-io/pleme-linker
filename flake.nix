@@ -2,7 +2,7 @@
   description = "pleme-linker - Nix-native JavaScript package manager";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/d6c71932130818840fc8fe9509cf50be8c64634f";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     crate2nix = {
       url = "github:nix-community/crate2nix";
       inputs.nixpkgs.follows = "nixpkgs";
