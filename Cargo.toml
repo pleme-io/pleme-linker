@@ -2,9 +2,15 @@
 name = "pleme-linker"
 version = "0.3.0"
 edition = "2021"
+authors = ["Pleme Team <team@pleme.io>"]
 description = "Nix-native JavaScript package manager"
 license = "MIT"
 repository = "https://github.com/pleme-io/pleme-linker"
+homepage = "https://github.com/pleme-io/pleme-linker"
+readme = "README.md"
+keywords = ["nix", "javascript", "package-manager", "npm", "linker"]
+categories = ["development-tools", "command-line-utilities"]
+exclude = ["module/", "target/", "result-*", "Cargo.nix", "flake.*"]
 
 [[bin]]
 name = "pleme-linker"
