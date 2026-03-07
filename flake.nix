@@ -13,7 +13,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, crate2nix }:
+  outputs = { self, nixpkgs, crate2nix, devenv, ... }:
     let
       supportedSystems = [ "aarch64-darwin" "x86_64-linux" "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
