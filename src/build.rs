@@ -444,3 +444,49 @@ fn compare_versions(v1: &str, v2: &str) -> std::cmp::Ordering {
 
     parse(v1).cmp(&parse(v2))
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::path::PathBuf;
+
+    #[test]
+    fn test_create_bin_link_missing_target_returns_ok_false() {
+        let tmp = tempfile::tempdir().unwrap();
+        let bin_dir = tmp.path().join(".bin");
+        fs::create_dir_all(&bin_dir).unwrap();
+
+        let pkg_path = tmp.path().join("pkg");
+        fs::create_dir_all(&pkg_path).unwrap();
+
+        // bin target "cli.js" does not exist in pkg_path
+        let node_bin = PathBuf::from("/usr/bin/env");
+        let result = create_bin_link(&bin_dir, "my-tool", &pkg_path, "./cli.js", &node_bin);
+
+        assert!(result.is_ok(), "Expected Ok, got Err: {:?}", result.err());
+        assert_eq!(result.unwrap(), false, "Expected Ok(false) for missing target");
+        // Wrapper script should NOT have been created
+        assert!(!bin_dir.join("my-tool").exists());
+    }
+
+    #[test]
+    fn test_create_bin_link_existing_target_returns_ok_true() {
+        let tmp = tempfile::tempdir().unwrap();
+        let bin_dir = tmp.path().join(".bin");
+        fs::create_dir_all(&bin_dir).unwrap();
+
+        let pkg_path = tmp.path().join("pkg");
+        fs::create_dir_all(&pkg_path).unwrap();
+
+        // Create the bin target so it exists
+        fs::write(pkg_path.join("cli.js"), "#!/usr/bin/env node\nconsole.log('hi');").unwrap();
+
+        let node_bin = PathBuf::from("/usr/bin/env");
+        let result = create_bin_link(&bin_dir, "my-tool", &pkg_path, "./cli.js", &node_bin);
+
+        assert!(result.is_ok(), "Expected Ok, got Err: {:?}", result.err());
+        assert_eq!(result.unwrap(), true, "Expected Ok(true) for existing target");
+        // Wrapper script should have been created
+        assert!(bin_dir.join("my-tool").exists());
+    }
+}

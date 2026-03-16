@@ -54,3 +54,6 @@ regex = "1"
 # Legacy (to be removed after migration)
 serde_yaml = "0.9"
 walkdir = "2.5"
+
+[dev-dependencies]
+tempfile = "3"

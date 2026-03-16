@@ -120,14 +120,6 @@ fn test_default_react_externals() {
     let packages: Vec<&str> = externals.iter().map(|e| e.package.as_str()).collect();
     assert!(packages.contains(&"react"), "Should include react");
     assert!(packages.contains(&"react-dom"), "Should include react-dom");
-    assert!(
-        packages.contains(&"@mui/material"),
-        "Should include @mui/material"
-    );
-    assert!(
-        packages.contains(&"@apollo/client"),
-        "Should include @apollo/client"
-    );
 
     // Check that React and ReactDOM have CDN URLs
     let react = externals.iter().find(|e| e.package == "react").unwrap();

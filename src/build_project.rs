@@ -512,3 +512,56 @@ fn build_workspace_package(
 
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs;
+
+    #[test]
+    fn test_has_tsconfig_true_when_present() {
+        let tmp = tempfile::tempdir().unwrap();
+        fs::write(tmp.path().join("tsconfig.json"), "{}").unwrap();
+
+        let has_tsconfig = tmp.path().join("tsconfig.json").exists();
+        assert!(has_tsconfig, "has_tsconfig should be true when tsconfig.json exists");
+    }
+
+    #[test]
+    fn test_has_tsconfig_false_when_absent() {
+        let tmp = tempfile::tempdir().unwrap();
+        // No tsconfig.json created
+
+        let has_tsconfig = tmp.path().join("tsconfig.json").exists();
+        assert!(!has_tsconfig, "has_tsconfig should be false when tsconfig.json is missing");
+    }
+
+    #[test]
+    fn test_copy_js_source_files_copies_expected_extensions() {
+        let tmp = tempfile::tempdir().unwrap();
+        let src_dir = tmp.path().join("src");
+        let out_dir = tmp.path().join("out");
+        fs::create_dir_all(&src_dir).unwrap();
+
+        // Create files with various extensions
+        fs::write(src_dir.join("index.js"), "export default 1;").unwrap();
+        fs::write(src_dir.join("utils.mjs"), "export const a = 1;").unwrap();
+        fs::write(src_dir.join("config.cjs"), "module.exports = {};").unwrap();
+        fs::write(src_dir.join("data.json"), "{}").unwrap();
+        // These should NOT be copied
+        fs::write(src_dir.join("style.css"), "body {}").unwrap();
+        fs::write(src_dir.join("readme.md"), "# hi").unwrap();
+        fs::write(src_dir.join("main.ts"), "const x: number = 1;").unwrap();
+
+        let copied = copy_js_source_files(&src_dir, &out_dir).unwrap();
+
+        assert_eq!(copied.len(), 4, "Should copy exactly 4 files (.js, .mjs, .cjs, .json)");
+        assert!(out_dir.join("index.js").exists(), "index.js should be copied");
+        assert!(out_dir.join("utils.mjs").exists(), "utils.mjs should be copied");
+        assert!(out_dir.join("config.cjs").exists(), "config.cjs should be copied");
+        assert!(out_dir.join("data.json").exists(), "data.json should be copied");
+        assert!(!out_dir.join("style.css").exists(), "style.css should NOT be copied");
+        assert!(!out_dir.join("readme.md").exists(), "readme.md should NOT be copied");
+        assert!(!out_dir.join("main.ts").exists(), "main.ts should NOT be copied");
+    }
+}
