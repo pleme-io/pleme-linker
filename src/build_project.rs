@@ -1,11 +1,16 @@
-//! TypeScript project building (for non-Vite use cases)
+//! TypeScript/JavaScript project building (for non-Vite use cases)
 //!
 //! This fills the gap that Vite fills for frontend projects.
-//! For backend TypeScript projects (like MCP servers), we need:
+//! For backend projects (like MCP servers, GitHub Actions), we need:
 //! 1. node_modules built from deps.nix
 //! 2. TypeScript compilation (native Rolldown or fallback to tsc)
+//!    OR direct copy for plain JavaScript projects
 //! 3. Workspace dependency handling
 //! 4. Wrapper script creation
+//!
+//! Auto-detects project type:
+//! - If tsconfig.json exists: TypeScript mode (OXC compilation)
+//! - If no tsconfig.json: JavaScript mode (copy source files directly)
 //!
 //! With --native-compile (default), uses pure Rust Rolldown bundler.
 //! With --use-tsc, falls back to shelling out to tsc.
@@ -30,9 +35,44 @@ struct WorkspaceDepInfo {
     source_path: Option<PathBuf>,
 }
 
+/// Copy JavaScript source files (preserving directory structure) for JS-mode builds
+fn copy_js_source_files(src_dir: &Path, out_dir: &Path) -> Result<Vec<PathBuf>> {
+    let mut outputs = Vec::new();
+    fs::create_dir_all(out_dir)?;
+
+    for entry in walkdir::WalkDir::new(src_dir)
+        .into_iter()
+        .filter_map(|e| e.ok())
+        .filter(|e| {
+            let path = e.path();
+            path.is_file()
+                && path.extension().map_or(false, |ext| {
+                    ext == "js" || ext == "mjs" || ext == "cjs" || ext == "json"
+                })
+        })
+    {
+        let source_path = entry.path();
+        let relative_path = source_path.strip_prefix(src_dir).unwrap_or(source_path);
+        let output_path = out_dir.join(relative_path);
+
+        if let Some(parent) = output_path.parent() {
+            fs::create_dir_all(parent)?;
+        }
+
+        println!("    Copying: {}", relative_path.display());
+        fs::copy(source_path, &output_path)?;
+        outputs.push(output_path);
+    }
+
+    Ok(outputs)
+}
+
 /// Run the build-project command
 pub fn run_build_project(args: BuildProjectArgs) -> Result<()> {
-    println!("pleme-linker build-project: Building TypeScript project");
+    // Auto-detect project type based on tsconfig.json presence
+    let has_tsconfig = args.project.join("tsconfig.json").exists();
+    let project_kind = if has_tsconfig { "TypeScript" } else { "JavaScript" };
+    println!("pleme-linker build-project: Building {} project", project_kind);
     println!("  Project:  {}", args.project.display());
     println!("  Output:   {}", args.output.display());
     println!("  Manifest: {}", args.manifest.display());
@@ -199,9 +239,9 @@ pub fn run_build_project(args: BuildProjectArgs) -> Result<()> {
             println!("  Assets: {} files", result.assets.len());
             println!("  OXC build successful!");
         }
-    } else {
+    } else if has_tsconfig {
         // =====================================================================
-        // CLI TOOL BUILD: Simple transpilation (no bundling)
+        // CLI TOOL BUILD (TypeScript): Simple transpilation (no bundling)
         // =====================================================================
         println!("Stage 3: Compiling TypeScript with OXC (pure Rust)...");
 
@@ -217,6 +257,18 @@ pub fn run_build_project(args: BuildProjectArgs) -> Result<()> {
 
         println!("  Generated {} declaration files", declarations.len());
         println!("  TypeScript compilation successful");
+    } else {
+        // =====================================================================
+        // CLI TOOL BUILD (JavaScript): Copy source files directly
+        // =====================================================================
+        println!("  No tsconfig.json found — JavaScript mode (skipping TypeScript compilation)");
+        println!("Stage 3: Copying JavaScript source files...");
+
+        let copied = copy_js_source_files(&src_dir, &dist_dir)
+            .with_context(|| "JavaScript source file copy failed")?;
+
+        println!("  Copied {} files", copied.len());
+        println!("  JavaScript source copy successful");
     }
 
     // =========================================================================
@@ -409,18 +461,27 @@ fn build_workspace_package(
         std::os::unix::fs::symlink(dep_path, &dep_target)?;
     }
 
-    // Run TypeScript compilation with OXC (pure Rust)
+    // Compile or copy source files depending on project type
     let ws_src_dir = build_dir.join("src");
     let ws_dist_dir = build_dir.join("dist");
 
     fs::create_dir_all(&ws_dist_dir)?;
 
-    // Compile TypeScript with OXC (synchronous)
-    rolldown_bundler::compile_typescript(&ws_src_dir, &ws_dist_dir)
-        .with_context(|| format!("OXC compilation failed for workspace package {}", name))?;
+    let ws_has_tsconfig = build_dir.join("tsconfig.json").exists();
 
-    generate_declarations(&ws_src_dir, &ws_dist_dir)
-        .with_context(|| format!("Declaration generation failed for workspace package {}", name))?;
+    if ws_has_tsconfig {
+        // TypeScript mode: compile with OXC (synchronous)
+        rolldown_bundler::compile_typescript(&ws_src_dir, &ws_dist_dir)
+            .with_context(|| format!("OXC compilation failed for workspace package {}", name))?;
+
+        generate_declarations(&ws_src_dir, &ws_dist_dir)
+            .with_context(|| format!("Declaration generation failed for workspace package {}", name))?;
+    } else {
+        // JavaScript mode: copy source files directly
+        println!("    No tsconfig.json — JavaScript mode for {}", name);
+        copy_js_source_files(&ws_src_dir, &ws_dist_dir)
+            .with_context(|| format!("JS source copy failed for workspace package {}", name))?;
+    }
 
     // Copy dist to output
     let dist_dir = build_dir.join("dist");
