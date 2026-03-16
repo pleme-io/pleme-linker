@@ -401,6 +401,15 @@ fn create_bin_link(
     let link_path = bin_dir.join(name);
     let target = pkg_path.join(bin_path.trim_start_matches("./"));
 
+    // Skip if the bin target doesn't exist in the extracted package
+    if !target.exists() {
+        eprintln!(
+            "  Warning: bin target not found, skipping: {}",
+            target.display()
+        );
+        return Ok(());
+    }
+
     // Create a shell wrapper that invokes node
     let wrapper = format!(
         "#!/bin/sh\nexec {} {} \"$@\"\n",
