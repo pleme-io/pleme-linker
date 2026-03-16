@@ -216,15 +216,23 @@ pub fn run_build(args: BuildArgs) -> Result<()> {
                         serde_json::Value::String(path) => {
                             // Single binary with package name
                             let bin_name = pkg.pname.split('/').last().unwrap();
-                            create_bin_link(&bin_dir, bin_name, pkg_path, path, &args.node_bin)?;
-                            bin_count += 1;
+                            match create_bin_link(&bin_dir, bin_name, pkg_path, path, &args.node_bin) {
+                                Ok(created) => { if created { bin_count += 1; } }
+                                Err(e) => {
+                                    eprintln!("  Warning: failed to create bin entry '{}' for {}: {}", bin_name, pkg_key, e);
+                                }
+                            }
                         }
                         serde_json::Value::Object(bins) => {
                             // Multiple binaries
                             for (name, path) in bins {
                                 if let serde_json::Value::String(path_str) = path {
-                                    create_bin_link(&bin_dir, name, pkg_path, path_str, &args.node_bin)?;
-                                    bin_count += 1;
+                                    match create_bin_link(&bin_dir, name, pkg_path, path_str, &args.node_bin) {
+                                        Ok(created) => { if created { bin_count += 1; } }
+                                        Err(e) => {
+                                            eprintln!("  Warning: failed to create bin entry '{}' for {}: {}", name, pkg_key, e);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -395,7 +403,7 @@ fn create_bin_link(
     pkg_path: &Path,
     bin_path: &str,
     node_bin: &Path,
-) -> Result<()> {
+) -> Result<bool> {
     use std::os::unix::fs::PermissionsExt;
 
     let link_path = bin_dir.join(name);
@@ -407,7 +415,7 @@ fn create_bin_link(
             "  Warning: bin target not found, skipping: {}",
             target.display()
         );
-        return Ok(());
+        return Ok(false);
     }
 
     // Create a shell wrapper that invokes node
@@ -420,7 +428,7 @@ fn create_bin_link(
     fs::write(&link_path, wrapper)?;
     fs::set_permissions(&link_path, fs::Permissions::from_mode(0o755))?;
 
-    Ok(())
+    Ok(true)
 }
 
 /// Compare two semver versions
