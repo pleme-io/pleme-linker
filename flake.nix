@@ -11,9 +11,13 @@
       url = "github:cachix/devenv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    substrate = {
+      url = "github:pleme-io/substrate";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, crate2nix, devenv, ... }:
+  outputs = { self, nixpkgs, crate2nix, devenv, substrate, ... }:
     let
       supportedSystems = [ "aarch64-darwin" "x86_64-linux" "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -38,8 +42,11 @@
                 ))
           );
 
-          cargoNix = pkgs.callPackage ./Cargo.nix {
-            defaultCrateOverrides = pkgs.defaultCrateOverrides // {
+          lockfileBuilder = import "${substrate}/lib/build/rust/lockfile-builder.nix" { inherit pkgs; };
+          plemeCrateOverrides = import "${substrate}/lib/build/rust/pleme-crate-overrides.nix";
+          cargoNix = lockfileBuilder.mkProject {
+            src = self;
+            defaultCrateOverrides = pkgs.defaultCrateOverrides // plemeCrateOverrides // {
               ring = attrs: {
                 nativeBuildInputs = (attrs.nativeBuildInputs or [ ]) ++ [
                   pkgs.cmake
