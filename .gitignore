@@ -16,3 +16,4 @@ Thumbs.db
 # Nix
 /result
 /result-*
+Cargo.build-spec.json
