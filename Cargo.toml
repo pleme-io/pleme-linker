@@ -1,6 +1,6 @@
 [package]
 name = "pleme-linker"
-version = "0.3.2"
+version = "0.3.3"
 edition = "2021"
 authors = ["Pleme Team <team@pleme.io>"]
 description = "Nix-native JavaScript package manager"

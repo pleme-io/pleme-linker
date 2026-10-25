@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "cargo_lock_sha256": "bb92d4e23a5f6bd120796b965b268786b836473363ba6de8ab62628be4c11e78",
+  "cargo_lock_sha256": "8a5ffa24492c804a91ad2ed548fe0c4be2c16c5c90fb39e35c64a39970b51096",
   "manifest_sha256": {
-    "Cargo.toml": "bec340ce4a616ed1e0569434bd60de5d6126dbdfbcbfb2c63474306f50b6affc"
+    "Cargo.toml": "472dcce096f811d2469506672bfd0c999cafcaf6061c16a4f6e4f3a8dce8af2c"
   },
   "target_resolves": {
     "base": {
@@ -597,7 +597,7 @@
           "default"
         ]
       },
-      "crc32fast-1.5.2": {
+      "crc32fast-1.5.3": {
         "runtime_dependencies": [
           {
             "name": "cfg_if",
@@ -783,7 +783,7 @@
           "std"
         ]
       },
-      "escape-simd-0.1.0": {
+      "escape-simd-0.1.1": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -835,7 +835,7 @@
         "runtime_dependencies": [
           {
             "name": "crc32fast",
-            "package_key": "crc32fast-1.5.2",
+            "package_key": "crc32fast-1.5.3",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1649,7 +1649,7 @@
           },
           {
             "name": "tokio",
-            "package_key": "tokio-1.53.3",
+            "package_key": "tokio-1.54.1",
             "kind": "normal",
             "features": [
               "sync"
@@ -1724,7 +1724,7 @@
           },
           {
             "name": "tokio",
-            "package_key": "tokio-1.53.3",
+            "package_key": "tokio-1.54.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1754,7 +1754,7 @@
           },
           {
             "name": "webpki_roots",
-            "package_key": "webpki-roots-1.0.9",
+            "package_key": "webpki-roots-1.0.11",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1908,7 +1908,7 @@
           },
           {
             "name": "tokio",
-            "package_key": "tokio-1.53.3",
+            "package_key": "tokio-1.54.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1949,7 +1949,7 @@
           "tokio"
         ]
       },
-      "icu_collections-2.3.0": {
+      "icu_collections-2.4.0": {
         "runtime_dependencies": [
           {
             "name": "displaydoc",
@@ -2009,7 +2009,7 @@
           },
           {
             "name": "zerovec",
-            "package_key": "zerovec-0.11.8",
+            "package_key": "zerovec-0.11.9",
             "kind": "normal",
             "features": [
               "derive",
@@ -2024,7 +2024,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "icu_locale_core-2.3.0": {
+      "icu_locale_core-2.4.0": {
         "runtime_dependencies": [
           {
             "name": "displaydoc",
@@ -2048,7 +2048,7 @@
           },
           {
             "name": "tinystr",
-            "package_key": "tinystr-0.8.4",
+            "package_key": "tinystr-0.8.5",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2068,7 +2068,7 @@
           },
           {
             "name": "zerovec",
-            "package_key": "zerovec-0.11.8",
+            "package_key": "zerovec-0.11.9",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2083,11 +2083,11 @@
           "zerovec"
         ]
       },
-      "icu_locale_fallback-2.3.0": {
+      "icu_locale_fallback-2.4.0": {
         "runtime_dependencies": [
           {
             "name": "icu_locale_core",
-            "package_key": "icu_locale_core-2.3.0",
+            "package_key": "icu_locale_core-2.4.0",
             "kind": "normal",
             "features": [
               "alloc",
@@ -2100,7 +2100,7 @@
           },
           {
             "name": "icu_locale_fallback_data",
-            "package_key": "icu_locale_fallback_data-2.3.0",
+            "package_key": "icu_locale_fallback_data-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2110,7 +2110,7 @@
           },
           {
             "name": "icu_provider",
-            "package_key": "icu_provider-2.3.1",
+            "package_key": "icu_provider-2.4.0",
             "kind": "normal",
             "features": [
               "alloc"
@@ -2135,7 +2135,7 @@
           },
           {
             "name": "tinystr",
-            "package_key": "tinystr-0.8.4",
+            "package_key": "tinystr-0.8.5",
             "kind": "normal",
             "features": [
               "alloc",
@@ -2148,7 +2148,7 @@
           },
           {
             "name": "zerovec",
-            "package_key": "zerovec-0.11.8",
+            "package_key": "zerovec-0.11.9",
             "kind": "normal",
             "features": [
               "alloc",
@@ -2165,16 +2165,16 @@
           "compiled_data"
         ]
       },
-      "icu_locale_fallback_data-2.3.0": {
+      "icu_locale_fallback_data-2.4.0": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
       },
-      "icu_normalizer-2.3.0": {
+      "icu_normalizer-2.4.0": {
         "runtime_dependencies": [
           {
             "name": "icu_collections",
-            "package_key": "icu_collections-2.3.0",
+            "package_key": "icu_collections-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2184,7 +2184,7 @@
           },
           {
             "name": "icu_normalizer_data",
-            "package_key": "icu_normalizer_data-2.3.0",
+            "package_key": "icu_normalizer_data-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2194,7 +2194,7 @@
           },
           {
             "name": "icu_provider",
-            "package_key": "icu_provider-2.3.1",
+            "package_key": "icu_provider-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2214,7 +2214,7 @@
           },
           {
             "name": "zerovec",
-            "package_key": "zerovec-0.11.8",
+            "package_key": "zerovec-0.11.9",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2228,12 +2228,12 @@
           "compiled_data"
         ]
       },
-      "icu_normalizer_data-2.3.0": {
+      "icu_normalizer_data-2.4.0": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
       },
-      "icu_properties-2.3.0": {
+      "icu_properties-2.4.0": {
         "runtime_dependencies": [
           {
             "name": "displaydoc",
@@ -2247,7 +2247,7 @@
           },
           {
             "name": "icu_collections",
-            "package_key": "icu_collections-2.3.0",
+            "package_key": "icu_collections-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2257,7 +2257,7 @@
           },
           {
             "name": "icu_locale_core",
-            "package_key": "icu_locale_core-2.3.0",
+            "package_key": "icu_locale_core-2.4.0",
             "kind": "normal",
             "features": [
               "zerovec"
@@ -2269,7 +2269,7 @@
           },
           {
             "name": "icu_properties_data",
-            "package_key": "icu_properties_data-2.3.0",
+            "package_key": "icu_properties_data-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2279,7 +2279,7 @@
           },
           {
             "name": "icu_provider",
-            "package_key": "icu_provider-2.3.1",
+            "package_key": "icu_provider-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2302,7 +2302,7 @@
           },
           {
             "name": "zerovec",
-            "package_key": "zerovec-0.11.8",
+            "package_key": "zerovec-0.11.9",
             "kind": "normal",
             "features": [
               "derive",
@@ -2319,12 +2319,12 @@
           "compiled_data"
         ]
       },
-      "icu_properties_data-2.3.0": {
+      "icu_properties_data-2.4.0": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
       },
-      "icu_provider-2.3.1": {
+      "icu_provider-2.4.0": {
         "runtime_dependencies": [
           {
             "name": "displaydoc",
@@ -2338,7 +2338,7 @@
           },
           {
             "name": "icu_locale_core",
-            "package_key": "icu_locale_core-2.3.0",
+            "package_key": "icu_locale_core-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2402,7 +2402,7 @@
           },
           {
             "name": "zerovec",
-            "package_key": "zerovec-0.11.8",
+            "package_key": "zerovec-0.11.9",
             "kind": "normal",
             "features": [
               "derive"
@@ -2419,11 +2419,11 @@
           "baked"
         ]
       },
-      "icu_segmenter-2.3.0": {
+      "icu_segmenter-2.4.0": {
         "runtime_dependencies": [
           {
             "name": "icu_collections",
-            "package_key": "icu_collections-2.3.0",
+            "package_key": "icu_collections-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2433,7 +2433,7 @@
           },
           {
             "name": "icu_locale_fallback",
-            "package_key": "icu_locale_fallback-2.3.0",
+            "package_key": "icu_locale_fallback-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2443,7 +2443,7 @@
           },
           {
             "name": "icu_provider",
-            "package_key": "icu_provider-2.3.1",
+            "package_key": "icu_provider-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2453,7 +2453,7 @@
           },
           {
             "name": "icu_segmenter_data",
-            "package_key": "icu_segmenter_data-2.3.0",
+            "package_key": "icu_segmenter_data-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2495,8 +2495,21 @@
             "tree": "target"
           },
           {
+            "name": "zerotrie",
+            "package_key": "zerotrie-0.2.5",
+            "kind": "normal",
+            "features": [
+              "yoke",
+              "zerofrom"
+            ],
+            "uses_default_features": false,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
             "name": "zerovec",
-            "package_key": "zerovec-0.11.8",
+            "package_key": "zerovec-0.11.9",
             "kind": "normal",
             "features": [
               "alloc",
@@ -2513,7 +2526,7 @@
           "compiled_data"
         ]
       },
-      "icu_segmenter_data-2.3.0": {
+      "icu_segmenter_data-2.4.0": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -2564,7 +2577,7 @@
         "runtime_dependencies": [
           {
             "name": "icu_normalizer",
-            "package_key": "icu_normalizer-2.3.0",
+            "package_key": "icu_normalizer-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2574,7 +2587,7 @@
           },
           {
             "name": "icu_properties",
-            "package_key": "icu_properties-2.3.0",
+            "package_key": "icu_properties-2.4.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2668,11 +2681,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "json-escape-simd-3.1.2": {
+      "json-escape-simd-3.1.3": {
         "runtime_dependencies": [
           {
             "name": "escape_simd",
-            "package_key": "escape-simd-0.1.0",
+            "package_key": "escape-simd-0.1.1",
             "kind": "normal",
             "features": [
               "json"
@@ -4821,7 +4834,7 @@
           },
           {
             "name": "json_escape_simd",
-            "package_key": "json-escape-simd-3.1.2",
+            "package_key": "json-escape-simd-3.1.3",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -5735,7 +5748,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "pleme-linker-0.3.2": {
+      "pleme-linker-0.3.3": {
         "runtime_dependencies": [
           {
             "name": "anyhow",
@@ -5888,7 +5901,7 @@
           },
           {
             "name": "tokio",
-            "package_key": "tokio-1.53.3",
+            "package_key": "tokio-1.54.1",
             "kind": "normal",
             "features": [
               "macros",
@@ -5957,7 +5970,7 @@
           },
           {
             "name": "zerovec",
-            "package_key": "zerovec-0.11.8",
+            "package_key": "zerovec-0.11.9",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -6080,7 +6093,7 @@
           },
           {
             "name": "tokio",
-            "package_key": "tokio-1.53.3",
+            "package_key": "tokio-1.54.1",
             "kind": "normal",
             "features": [
               "sync"
@@ -6753,7 +6766,7 @@
           },
           {
             "name": "tokio",
-            "package_key": "tokio-1.53.3",
+            "package_key": "tokio-1.54.1",
             "kind": "normal",
             "features": [
               "net",
@@ -6824,7 +6837,7 @@
           },
           {
             "name": "webpki_roots",
-            "package_key": "webpki-roots-1.0.9",
+            "package_key": "webpki-roots-1.0.11",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -6922,7 +6935,7 @@
           },
           {
             "name": "webpki",
-            "package_key": "rustls-webpki-0.103.15",
+            "package_key": "rustls-webpki-0.103.16",
             "kind": "normal",
             "features": [
               "alloc"
@@ -6982,7 +6995,7 @@
           "web-time"
         ]
       },
-      "rustls-webpki-0.103.15": {
+      "rustls-webpki-0.103.16": {
         "runtime_dependencies": [
           {
             "name": "ring",
@@ -7731,7 +7744,7 @@
         "runtime_dependencies": [
           {
             "name": "icu_segmenter",
-            "package_key": "icu_segmenter-2.3.0",
+            "package_key": "icu_segmenter-2.4.0",
             "kind": "normal",
             "features": [
               "compiled_data"
@@ -7827,7 +7840,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "tinystr-0.8.4": {
+      "tinystr-0.8.5": {
         "runtime_dependencies": [
           {
             "name": "displaydoc",
@@ -7841,7 +7854,7 @@
           },
           {
             "name": "zerovec",
-            "package_key": "zerovec-0.11.8",
+            "package_key": "zerovec-0.11.9",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -7864,7 +7877,7 @@
           "default"
         ]
       },
-      "tokio-1.53.3": {
+      "tokio-1.54.1": {
         "runtime_dependencies": [
           {
             "name": "bytes",
@@ -7948,7 +7961,7 @@
             ],
             "uses_default_features": true,
             "optional": true,
-            "target": "cfg(any(not(target_family = \"wasm\"), all(target_os = \"wasi\", not(target_env = \"p1\"))))",
+            "target": "cfg(any(not(target_family = \"wasm\"), target_os = \"emscripten\", all(target_os = \"wasi\", not(target_env = \"p1\"))))",
             "tree": "target"
           },
           {
@@ -8034,7 +8047,7 @@
           },
           {
             "name": "tokio",
-            "package_key": "tokio-1.53.3",
+            "package_key": "tokio-1.54.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -8095,7 +8108,7 @@
           },
           {
             "name": "tokio",
-            "package_key": "tokio-1.53.3",
+            "package_key": "tokio-1.54.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -8507,7 +8520,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "webpki-roots-1.0.9": {
+      "webpki-roots-1.0.11": {
         "runtime_dependencies": [
           {
             "name": "pki_types",
@@ -8759,7 +8772,7 @@
           "zerofrom"
         ]
       },
-      "zerovec-0.11.8": {
+      "zerovec-0.11.9": {
         "runtime_dependencies": [
           {
             "name": "yoke",
@@ -8783,7 +8796,7 @@
           },
           {
             "name": "zerovec_derive",
-            "package_key": "zerovec-derive-0.11.6",
+            "package_key": "zerovec-derive-0.11.7",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -8799,7 +8812,7 @@
           "yoke"
         ]
       },
-      "zerovec-derive-0.11.6": {
+      "zerovec-derive-0.11.7": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -10405,7 +10418,7 @@
     "cpufeatures-0.3.1": {
       "edition": "2024"
     },
-    "crc32fast-1.5.2": {
+    "crc32fast-1.5.3": {
       "edition": "2021",
       "build_script": "build.rs"
     },
@@ -10437,7 +10450,7 @@
     "errno-0.3.14": {
       "edition": "2018"
     },
-    "escape-simd-0.1.0": {
+    "escape-simd-0.1.1": {
       "edition": "2024"
     },
     "fastrand-2.5.0": {
@@ -10531,40 +10544,40 @@
     "iana-time-zone-0.1.65": {
       "edition": "2021"
     },
-    "icu_collections-2.3.0": {
+    "icu_collections-2.4.0": {
       "edition": "2024"
     },
-    "icu_locale_core-2.3.0": {
+    "icu_locale_core-2.4.0": {
       "edition": "2024"
     },
-    "icu_locale_fallback-2.3.0": {
+    "icu_locale_fallback-2.4.0": {
       "edition": "2024"
     },
-    "icu_locale_fallback_data-2.3.0": {
+    "icu_locale_fallback_data-2.4.0": {
       "edition": "2024",
       "build_script": "build.rs"
     },
-    "icu_normalizer-2.3.0": {
+    "icu_normalizer-2.4.0": {
       "edition": "2024"
     },
-    "icu_normalizer_data-2.3.0": {
+    "icu_normalizer_data-2.4.0": {
       "edition": "2024",
       "build_script": "build.rs"
     },
-    "icu_properties-2.3.0": {
+    "icu_properties-2.4.0": {
       "edition": "2024"
     },
-    "icu_properties_data-2.3.0": {
+    "icu_properties_data-2.4.0": {
       "edition": "2024",
       "build_script": "build.rs"
     },
-    "icu_provider-2.3.1": {
+    "icu_provider-2.4.0": {
       "edition": "2024"
     },
-    "icu_segmenter-2.3.0": {
+    "icu_segmenter-2.4.0": {
       "edition": "2024"
     },
-    "icu_segmenter_data-2.3.0": {
+    "icu_segmenter_data-2.4.0": {
       "edition": "2024",
       "build_script": "build.rs"
     },
@@ -10589,7 +10602,7 @@
     "itoa-1.0.18": {
       "edition": "2021"
     },
-    "json-escape-simd-3.1.2": {
+    "json-escape-simd-3.1.3": {
       "edition": "2024"
     },
     "json-strip-comments-1.0.4": {
@@ -10765,7 +10778,7 @@
     "pin-project-lite-0.2.17": {
       "edition": "2018"
     },
-    "pleme-linker-0.3.2": {
+    "pleme-linker-0.3.3": {
       "edition": "2021",
       "binaries": [
         {
@@ -10842,7 +10855,7 @@
     "rustls-pki-types-1.15.1": {
       "edition": "2021"
     },
-    "rustls-webpki-0.103.15": {
+    "rustls-webpki-0.103.16": {
       "edition": "2021",
       "lib_target": {
         "name": "webpki",
@@ -10966,13 +10979,13 @@
       "edition": "2021",
       "proc_macro": true
     },
-    "tinystr-0.8.4": {
+    "tinystr-0.8.5": {
       "edition": "2021"
     },
     "tinyvec-1.13.3": {
       "edition": "2018"
     },
-    "tokio-1.53.3": {
+    "tokio-1.54.1": {
       "edition": "2021"
     },
     "tokio-macros-2.7.2": {
@@ -11059,7 +11072,7 @@
     "want-0.3.2": {
       "edition": "2018"
     },
-    "webpki-roots-1.0.9": {
+    "webpki-roots-1.0.11": {
       "edition": "2021"
     },
     "writeable-0.6.4": {
@@ -11088,10 +11101,10 @@
     "zerotrie-0.2.5": {
       "edition": "2021"
     },
-    "zerovec-0.11.8": {
+    "zerovec-0.11.9": {
       "edition": "2021"
     },
-    "zerovec-derive-0.11.6": {
+    "zerovec-derive-0.11.7": {
       "edition": "2021",
       "proc_macro": true
     },
